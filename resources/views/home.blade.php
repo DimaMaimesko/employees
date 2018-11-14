@@ -13,8 +13,15 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    <div class="text-center">
                     You are logged in!
+                        <p>
+                            <a href="{{ route('list.index') }}" class="btn btn-success">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                EMPLOYEES
+                            </a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

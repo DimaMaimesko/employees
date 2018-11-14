@@ -73,8 +73,15 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                @include('layouts.flash')
+                @yield('content')
+            </div>
         </main>
     </div>
+<script>
+
+</script>
+    @yield('scripts')
 </body>
 </html>
