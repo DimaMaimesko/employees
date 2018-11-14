@@ -17,7 +17,7 @@ class CreateEmployeesTable extends Migration
             $table->increments('id')->unique();
             $table->string('name', 190)->index();
             $table->string('position', 190);
-            $table->string('salary', 20);
+            $table->integer('salary');
             $table->string('hired_at', 100);
             $table->integer('boss_id')->nullable();
             $table->integer('sort')->default(0);

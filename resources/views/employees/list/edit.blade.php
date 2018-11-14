@@ -19,7 +19,7 @@
     </div>
     <div class="form-group">
         <label>Boss Id</label>
-        {!! Form::text('boss_id',isset($employee->boss_id) ? $boss_id : old('boss_id'),['class'=>'form-control','placeholder'=>'Boss id']) !!}
+        {!! Form::text('boss_id',isset($employee->boss_id) ? $employee->boss_id : "",['class'=>'form-control','placeholder'=>'Boss id']) !!}
     </div>
 
     <button type="submit" class="btn btn-success text-uppercase"><i class="fa fa-save"></i> Update</button>

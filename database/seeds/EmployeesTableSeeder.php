@@ -11,8 +11,8 @@ class EmployeesTableSeeder extends Seeder
         $depth_0_sort = 10;
         $depth_1_sort = random_int(0, 10);
         $depth_2_sort = random_int(0, 10);
-        $depth_3_sort = random_int(10, 20);
-        $depth_4_sort = random_int(10, 20);
+        $depth_3_sort = random_int(5, 10);
+        $depth_4_sort = random_int(5, 10);
 
         for ($i = 0; $i <= $depth_0_sort; $i++){
             factory(Employee::class)->create([

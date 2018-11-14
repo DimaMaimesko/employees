@@ -13,7 +13,7 @@ class EmployeesController extends Controller
 
     public function index(Request $request)
     {
-        $query = Employee::orderBy('sort');
+        $query = Employee::orderBy('id');
 
         if (!empty($value = $request->get('id'))) {
             $query->where('id', $value);
@@ -86,13 +86,14 @@ class EmployeesController extends Controller
 
     public function sortAsc($targetField)
     {
-        $employees = Employee::orderBy($targetField)->with('parent')->paginate(self::EMPLOYEES_FOR_PAGINATION);
+        $employees = Employee::orderBy($targetField, 'asc')->with('parent')->paginate(self::EMPLOYEES_FOR_PAGINATION);
         return  view('employees.list.index', compact('employees'));
     }
 
     public function sortDesc($targetField)
     {
-        $employees = Employee::orderBy($targetField, 'DESC')->with('parent')->paginate(self::EMPLOYEES_FOR_PAGINATION);
+        dump($targetField);
+        $employees = Employee::orderBy($targetField, 'desc')->with('parent')->paginate(self::EMPLOYEES_FOR_PAGINATION);
         return  view('employees.list.index', compact('employees'));
     }
 }

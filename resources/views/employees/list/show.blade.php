@@ -30,7 +30,7 @@
                 <th>Salary</th><td>{{ $employee->salary }}</td>
             </tr>
             <tr>
-                <th>Boss name</th><td>{{$employee->parent ? $employee->parent->name : ""}}</td>
+                <th>Boss name</th><td>{{isset($employee->parent) ? $employee->parent->name : ""}}</td>
             </tr>
         </tbody>
     </table>
