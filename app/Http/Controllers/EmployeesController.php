@@ -12,7 +12,7 @@ class EmployeesController extends Controller
 
     public function index()
     {
-        $employees = Employee::where('boss_id', null)->orderBy('sort')->with('parent')->paginate(self::EMPLOYEES_FOR_PAGINATION);
+        $employees = Employee::orderBy('sort')->with('parent')->paginate(self::EMPLOYEES_FOR_PAGINATION);
         return  view('employees.list.index', compact('employees'));
     }
 
@@ -60,5 +60,17 @@ class EmployeesController extends Controller
         $employee = Employee::find($id);
         Employee::destroy($id);
         return redirect()->route('list.index')->with('warning', 'Employee ' .$employee->name . ' fired!');
+    }
+
+    public function sortAsc($targetField)
+    {
+        $employees = Employee::orderBy($targetField)->with('parent')->paginate(self::EMPLOYEES_FOR_PAGINATION);
+        return  view('employees.list.index', compact('employees'));
+    }
+
+    public function sortDesc($targetField)
+    {
+        $employees = Employee::orderBy($targetField, 'DESC')->with('parent')->paginate(self::EMPLOYEES_FOR_PAGINATION);
+        return  view('employees.list.index', compact('employees'));
     }
 }

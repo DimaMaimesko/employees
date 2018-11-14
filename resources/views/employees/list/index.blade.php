@@ -19,12 +19,13 @@
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Hiring Date</th>
-            <th>Salary</th>
-            <th>Boss name</th>
+            <th>ID<div class="d-flex flex-column float-right"><a href="{{route('list.sortDesc', 'id')}}"><i class="fa fa-sort-asc"></i></a> <a href="{{route('list.sortAsc', 'id')}}"><i class="fa fa-sort-desc"></i></a></div></th>
+            <th>Name<div class="d-flex flex-column float-right"><a href="{{route('list.sortDesc', 'name')}}"><i class="fa fa-sort-asc"></i></a> <a href="{{route('list.sortAsc', 'name')}}"><i class="fa fa-sort-desc"></i></a></div></th>
+            <th>Position<div class="d-flex flex-column float-right"><a href="{{route('list.sortDesc', 'position')}}"><i class="fa fa-sort-asc"></i></a> <a href="{{route('list.sortAsc', 'position')}}"><i class="fa fa-sort-desc"></i></a></div></th>
+            <th>Hiring Date<div class="d-flex flex-column float-right"><a href="{{route('list.sortDesc', 'hired_at')}}"><i class="fa fa-sort-asc"></i></a> <a href="{{route('list.sortAsc', 'hired_at')}}"><i class="fa fa-sort-desc"></i></a></div></th>
+            <th>Salary<div class="d-flex flex-column float-right"><a href="{{route('list.sortDesc', 'salary')}}"><i class="fa fa-sort-asc"></i></a> <a href="{{route('list.sortAsc', 'salary')}}"><i class="fa fa-sort-desc"></i></a></div></th>
+            <th>Boss name<div class="d-flex flex-column float-right"><a href="{{route('list.sortDesc', 'boss_id')}}"><i class="fa fa-sort-asc"></i></a> <a href="{{route('list.sortAsc', 'boss_id')}}"><i class="fa fa-sort-desc"></i></a></div></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>

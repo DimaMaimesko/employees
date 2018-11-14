@@ -21,4 +21,8 @@ Route::group([
         Route::get('/{id}/edit', 'EmployeesController@edit')->name('edit');
         Route::put('/{id}', 'EmployeesController@update')->name('update');
         Route::delete('/{id}', 'EmployeesController@destroy')->name('destroy');
+
+        Route::get('/sortasc/{targetField}', 'EmployeesController@sortAsc')->name('sortAsc');
+        Route::get('/sortdesc/{targetField}', 'EmployeesController@sortDesc')->name('sortDesc');
+
     });
