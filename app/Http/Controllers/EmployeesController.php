@@ -5,14 +5,36 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Http\Requests\EmployeeCreateRequest;
 use App\Http\Requests\EmployeeUpdateRequest;
+use Illuminate\Http\Request;
 
 class EmployeesController extends Controller
 {
-    private const EMPLOYEES_FOR_PAGINATION = 10;
+    private const EMPLOYEES_FOR_PAGINATION = 20;
 
-    public function index()
+    public function index(Request $request)
     {
-        $employees = Employee::orderBy('sort')->with('parent')->paginate(self::EMPLOYEES_FOR_PAGINATION);
+        $query = Employee::orderBy('sort');
+
+        if (!empty($value = $request->get('id'))) {
+            $query->where('id', $value);
+        }
+        if (!empty($value = $request->get('name'))) {
+            $query->where('name', $value);
+        }
+        if (!empty($value = $request->get('position'))) {
+            $query->where('position', $value);
+        }
+        if (!empty($value = $request->get('hired_at'))) {
+            $query->where('hired_at', $value);
+        }
+        if (!empty($value = $request->get('salary'))) {
+            $query->where('salary', $value);
+        }
+        if (!empty($value = $request->get('boss_id'))) {
+            $query->where('boss_id', $value);
+        }
+
+        $employees = $query->with('parent')->paginate(self::EMPLOYEES_FOR_PAGINATION);
         return  view('employees.list.index', compact('employees'));
     }
 
