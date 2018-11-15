@@ -20,6 +20,7 @@ Route::group([
         Route::get('/{id}', 'EmployeesController@show')->name('show');
         Route::get('/{id}/edit', 'EmployeesController@edit')->name('edit');
         Route::put('/{id}', 'EmployeesController@update')->name('update');
+        Route::get('/change-boss/{employee}', 'EmployeesController@changeBoss')->name('changeboss');
         Route::delete('/{id}', 'EmployeesController@destroy')->name('destroy');
 
         Route::get('/sortasc/{targetField}', 'EmployeesController@sortAsc')->name('sortAsc');

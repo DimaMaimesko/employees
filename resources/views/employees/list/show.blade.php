@@ -5,7 +5,7 @@
 
     <div class="d-flex flex-row mb-3">
         <a href="{{ route('list.edit', $employee) }}" class="btn btn-primary mr-1">Edit</a>
-        <form method="POST" action="{{ route('list.destroy', $employee) }}" data-confirm="Do you want to delete region {{$employee->name}}?" class="mr-1">
+        <form method="POST" action="{{ route('list.destroy', $employee) }}" data-confirm="Do you want to delete employee {{$employee->name}}?" class="mr-1">
             @csrf
             @method('DELETE')
             <button class="btn btn-danger">Delete</button>

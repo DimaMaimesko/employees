@@ -43,7 +43,7 @@ class EmployeesController extends Controller
         return view('employees.list.create');
     }
 
-    public function store(EmployeeValidate $request)
+    public function store(EmployeeCreateRequest $request)
     {
         $employee = Employee::create([
             'name' => $request->name,
@@ -80,8 +80,32 @@ class EmployeesController extends Controller
     public function destroy($id)
     {
         $employee = Employee::find($id);
-        Employee::destroy($id);
-        return redirect()->route('list.index')->with('warning', 'Employee ' .$employee->name . ' fired!');
+        $children =  $employee->children;
+        if (count($children) == 0) {
+            Employee::destroy($id);
+            return redirect()->route('list.index')->with('warning', 'Employee ' .$employee->name . ' fired!');
+        }else{
+           $siblings = Employee::where('boss_id', $employee->boss_id)->get();
+           $sib = $siblings->mapWithKeys(function($item) {
+              return [$item['id'] => $item['name']];
+           });
+           return view('employees.list.redeployment',[
+               'employee'   => $employee,
+               'children'   => $children,
+               'sib'        => $sib->all()
+           ]);
+        }
+    }
+
+    public function changeBoss(Request $request, $employee)
+    {
+        $newBossId  = $request->get('newBossId');
+        $employee = Employee::find($employee);
+        $children = $employee->children;
+        foreach ($children as $child) {
+            $child->update(['boss_id' => $newBossId]);
+        }
+        return redirect()->route('list.destroy', $employee);
     }
 
     public function sortAsc($targetField)
