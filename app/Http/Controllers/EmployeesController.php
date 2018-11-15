@@ -92,7 +92,6 @@ class EmployeesController extends Controller
 
     public function sortDesc($targetField)
     {
-        dump($targetField);
         $employees = Employee::orderBy($targetField, 'desc')->with('parent')->paginate(self::EMPLOYEES_FOR_PAGINATION);
         return  view('employees.list.index', compact('employees'));
     }

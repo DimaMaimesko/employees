@@ -26,3 +26,12 @@ Route::group([
         Route::get('/sortdesc/{targetField}', 'EmployeesController@sortDesc')->name('sortDesc');
 
     });
+
+Route::group([
+    'prefix' => 'tree',
+    'as' => 'tree.',
+    ], function () {
+        Route::get('/', 'TreeController@index')->name('index');
+        Route::get('/children/{employee}', 'TreeController@showChildren')->name('show');
+
+    });
