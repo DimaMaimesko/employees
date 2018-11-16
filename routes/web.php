@@ -36,3 +36,10 @@ Route::group([
         Route::get('/children/{employee}', 'TreeController@showChildren')->name('show');
 
     });
+Route::group([
+    'prefix' => 'jstree',
+    'as' => 'jstree.',
+    ], function () {
+        Route::get('/', 'JstreeController@index')->name('index');
+
+    });
