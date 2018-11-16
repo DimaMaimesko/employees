@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
         $admin->remember_token = str_random(10);
         $admin->save();
 
-        factory(User::class, 100)->create();
+        factory(User::class, 10)->create();
 
 
     }

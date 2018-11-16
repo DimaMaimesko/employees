@@ -41,5 +41,6 @@ Route::group([
     'as' => 'jstree.',
     ], function () {
         Route::get('/', 'JstreeController@index')->name('index');
+        Route::post('/', 'JstreeController@sort')->name('sort');
 
     });
