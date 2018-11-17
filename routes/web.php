@@ -29,6 +29,24 @@ Route::group([
     });
 
 Route::group([
+    'prefix' => 'ajaxlist',
+    'as' => 'ajaxlist.',
+    ], function () {
+        Route::get('/', 'AjaxEmployeesController@index')->name('index');
+        Route::get('/create', 'AjaxEmployeesController@create')->name('create');
+        Route::post('/create', 'AjaxEmployeesController@store')->name('store');
+        Route::get('/{id}', 'AjaxEmployeesController@show')->name('show');
+        Route::get('/{id}/edit', 'AjaxEmployeesController@edit')->name('edit');
+        Route::put('/{id}', 'AjaxEmployeesController@update')->name('update');
+        Route::get('/change-boss/{employee}', 'AjaxEmployeesController@changeBoss')->name('changeboss');
+        Route::delete('/{id}', 'AjaxEmployeesController@destroy')->name('destroy');
+
+        Route::get('/sortasc/{targetField}', 'AjaxEmployeesController@sortAsc')->name('sortAsc');
+        Route::get('/sortdesc/{targetField}', 'AjaxEmployeesController@sortDesc')->name('sortDesc');
+
+    });
+
+Route::group([
     'prefix' => 'tree',
     'as' => 'tree.',
     ], function () {
@@ -42,5 +60,6 @@ Route::group([
     ], function () {
         Route::get('/', 'JstreeController@index')->name('index');
         Route::post('/', 'JstreeController@sort')->name('sort');
+        Route::post('/show', 'JstreeController@show')->name('show');
 
     });

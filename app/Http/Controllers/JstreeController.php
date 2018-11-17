@@ -44,4 +44,14 @@ class JstreeController extends Controller
         ]);
         return response()->json(['Dima' => 'Maimesko']);
     }
+
+    public function show(Request $request)
+    {
+        $employee = Employee::where('id', $request->nodeId)->with('parent')->first();
+        $bossName = isset($employee->parent->name) ? $employee->parent->name : 'no boss';
+        return response()->json([
+            'employee' => $employee,
+            'bossName' =>  $bossName
+        ]);
+    }
 }

@@ -21,7 +21,6 @@ class CreateEmployeesTable extends Migration
             $table->string('hired_at', 100);
             $table->integer('boss_id')->nullable();
             $table->integer('sort')->default(0);
-            $table->integer('depth')->default(0);
             $table->timestamps();
         });
     }

@@ -2,19 +2,46 @@
 
 @section('content')
     @include('employees.jstree._nav')
-
-
-    <div class="row">
-        <h1>JsTree</h1>
+    <div class="container">
+    <div id="employee">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card card-default">
+                        <div class="card-header">Employee Info</div>
+                        <div class="card-body">
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                <tr>
+                                    <th>ID</th><td id="id"></td>
+                                </tr>
+                                <tr class="alert alert-info">
+                                    <th>Name</th><td id="name"></td>
+                                </tr>
+                                <tr>
+                                    <th>Position</th><td id="position"></td>
+                                </tr>
+                                <tr>
+                                    <th>Hiring Date</th><td id="hiring_date"></td>
+                                </tr>
+                                <tr>
+                                    <th>Salary</th><td id="salary"></td>
+                                </tr>
+                                <tr>
+                                    <th>Boss</th><td id="boss_name"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-
-<div class="container">
 
     <hr>
     <div id="js_tree">
     </div>
-
 </div>
 
 
@@ -22,8 +49,6 @@
 
 @section('scripts')
     <script>
-
-
         $('#js_tree').jstree({
             "core" : {
                 "animation" : 0,
@@ -63,24 +88,27 @@
             ]
         });
 
-        {{--$('#js_tree').on("select_node.jstree", function (e, data) {--}}
-            {{--console.log(data.node.id);--}}
-            {{--window.location.href = '{{ route(', ['id' => '']) }}/' + data.node.id;--}}
-        {{--});--}}
+        $('.card-body').hide();
+
+        $('#js_tree').on("select_node.jstree", function (e, data) {
+            axios.post('{{route('jstree.show')}}', {'nodeId': data.node.id})
+                .then( function (res) {
+                  if (res.data.employee.id) $('.card-body').show();
+                  $('#id').text(res.data.employee.id);
+                  $('#name').text(res.data.employee.name);
+                  $('#position').text(res.data.employee.position);
+                  $('#hiring_date').text(res.data.employee.hired_at);
+                  $('#salary').text(res.data.employee.salary);
+                  $('#boss_name').text(res.data.bossName);
+                });
+        });
+
 
         $('#js_tree').on('move_node.jstree', function (e, data)
         {
-            if (data.parent == '#'){
-                data.parent =  null;
-            }
-            if (data.old_parent == '#'){
-                data.old_parent =  null;
-            }
-            console.log('id: ' + data.node.id);
-            console.log('boss_id: ' + data.parent);
-            console.log('position: ' + data.position);
-            console.log('old_position: ' + data.old_position);
-            console.log('old_boss: ' + data.old_parent);
+            if (data.parent == '#') data.parent =  null;
+            if (data.old_parent == '#') data.old_parent =  null;
+
             $.post('{{ route('jstree.sort') }}',
                     { "_token": "{{ csrf_token() }}",
                         'id' : data.node.id,
@@ -91,7 +119,6 @@
                     },
                     function(data,status,xhr){
                         console.log(status);
-                        console.log(data.dima);
                     }
             )
                 .fail(function () {
