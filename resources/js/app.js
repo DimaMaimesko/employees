@@ -18,8 +18,6 @@ window.Vue = require('vue');
  */
 
 Vue.component('show-list', require('./components/ShowList.vue'));
-Vue.component('ajax-show-list', require('./components/AjaxShowList.vue'));
-Vue.component('pagination', require('./components/Pagination.vue'));
 
 // const files = require.context('./', true, /\.vue$/i)
 
