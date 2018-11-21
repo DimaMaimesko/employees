@@ -6,13 +6,16 @@ use App\Models\Employee;
 use App\Http\Requests\EmployeeCreateRequest;
 use App\Http\Requests\EmployeeUpdateRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AjaxEmployeesController extends Controller
 {
     private const EMPLOYEES_FOR_PAGINATION = 20;
+    private const LIMIT = 20;
 
     public function index(Request $request)
     {
+        session(['offset' => 0]);
         $query = Employee::orderBy('id');
 
         if (!empty($value = $request->get('id'))) {
@@ -33,9 +36,47 @@ class AjaxEmployeesController extends Controller
         if (!empty($value = $request->get('boss_id'))) {
             $query->where('boss_id', $value);
         }
+        $offset =   session('offset');
 
-        $employees = $query->with('parent')->paginate(self::EMPLOYEES_FOR_PAGINATION);
-        return  view('employees.ajaxlist.index', compact('employees'));
+        $ids = DB::table('employees')->offset($offset)->limit(self::LIMIT)->pluck('id')->toArray();
+        $employees = $query->with('parent')->whereIn('id', $ids)->get();
+        $pages = ceil(Employee::count()/self::LIMIT);
+
+        return  view('employees.ajaxlist.index', compact(['employees', 'pages']));
+    }
+
+    public function moreitems(Request $request)
+    {
+        $page = $request->get('body');
+        $query = Employee::orderBy('id');
+
+        if (!empty($value = $request->get('id'))) {
+            $query->where('id', $value);
+        }
+        if (!empty($value = $request->get('name'))) {
+            $query->where('name', $value);
+        }
+        if (!empty($value = $request->get('position'))) {
+            $query->where('position', $value);
+        }
+        if (!empty($value = $request->get('hired_at'))) {
+            $query->where('hired_at', $value);
+        }
+        if (!empty($value = $request->get('salary'))) {
+            $query->where('salary', $value);
+        }
+        if (!empty($value = $request->get('boss_id'))) {
+            $query->where('boss_id', $value);
+        }
+//        $offset = session('offset');
+//        $offset += self::LIMIT;
+//        session(['offset' => $offset]);
+        $offset = $page*self::LIMIT - self::LIMIT;
+        $ids = DB::table('employees')->offset($offset)->limit(self::LIMIT)->pluck('id')->toArray();
+        $employees = $query->with('parent')->whereIn('id', $ids)->get()->toArray();
+        $pages = ceil(Employee::count()/self::LIMIT);
+        return   compact(['employees', 'pages']);
+
     }
 
     public function create()

@@ -9,10 +9,10 @@ class EmployeesTableSeeder extends Seeder
     public function run()
     {
         $depth_0_sort = 10;
-        $depth_1_sort = random_int(1, 5);
-        $depth_2_sort = random_int(1, 3);
-        $depth_3_sort = random_int(1, 3);
-        $depth_4_sort = random_int(1, 3);
+        $depth_1_sort = random_int(5, 10);
+        $depth_2_sort = random_int(5, 15);
+        $depth_3_sort = random_int(5, 15);
+        $depth_4_sort = random_int(5, 15);
 
         for ($i = 0; $i <= $depth_0_sort; $i++){
             factory(Employee::class)->create([

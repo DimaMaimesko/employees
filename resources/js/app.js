@@ -17,8 +17,9 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('show-employee', require('./components/ShowEmployee.vue'));
+Vue.component('show-list', require('./components/ShowList.vue'));
+Vue.component('ajax-show-list', require('./components/AjaxShowList.vue'));
+Vue.component('pagination', require('./components/Pagination.vue'));
 
 // const files = require.context('./', true, /\.vue$/i)
 
@@ -35,6 +36,8 @@ Vue.component('show-employee', require('./components/ShowEmployee.vue'));
 const app = new Vue({
     el: '#app'
 });
+
+window.Event = new Vue();
 
 $("[data-confirm]").click(function() {
     return confirm($(this).attr('data-confirm'));

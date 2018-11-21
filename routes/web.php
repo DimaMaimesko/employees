@@ -1,6 +1,5 @@
 <?php
 
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -8,7 +7,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
 
 Route::group([
     'prefix' => 'list',
@@ -25,18 +23,20 @@ Route::group([
 
         Route::get('/sortasc/{targetField}', 'EmployeesController@sortAsc')->name('sortAsc');
         Route::get('/sortdesc/{targetField}', 'EmployeesController@sortDesc')->name('sortDesc');
-
     });
 
 Route::group([
     'prefix' => 'ajaxlist',
     'as' => 'ajaxlist.',
     ], function () {
+
         Route::get('/', 'AjaxEmployeesController@index')->name('index');
+        Route::post('moreitems', 'AjaxEmployeesController@moreitems')->name('moreitems');
+        Route::get('/{id}', 'AjaxEmployeesEmployeesController@show')->name('show');
         Route::get('/create', 'AjaxEmployeesController@create')->name('create');
         Route::post('/create', 'AjaxEmployeesController@store')->name('store');
-        Route::get('/{id}', 'AjaxEmployeesController@show')->name('show');
-        Route::get('/{id}/edit', 'AjaxEmployeesController@edit')->name('edit');
+
+        Route::get('/edit/{id}', 'AjaxEmployeesController@edit')->name('edit');
         Route::put('/{id}', 'AjaxEmployeesController@update')->name('update');
         Route::get('/change-boss/{employee}', 'AjaxEmployeesController@changeBoss')->name('changeboss');
         Route::delete('/{id}', 'AjaxEmployeesController@destroy')->name('destroy');
@@ -52,7 +52,6 @@ Route::group([
     ], function () {
         Route::get('/', 'TreeController@index')->name('index');
         Route::get('/children/{employee}', 'TreeController@showChildren')->name('show');
-
     });
 Route::group([
     'prefix' => 'jstree',

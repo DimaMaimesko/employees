@@ -5,6 +5,7 @@
 
 
     <div class="row">
+
         <div class="col-6 col-md-8 col-lg-10">
         </div>
         <div class="col-6 col-md-4 col-lg-2">
@@ -54,31 +55,22 @@
             </form>
         </div>
     </div>
-    <table class="table table-bordered table-striped">
-        <thead>
-        <tr>
-            <th style="width:5%;">ID<div class="d-flex flex-column float-right"><a href="{{route('ajaxlist.sortDesc', 'id')}}"><i class="fa fa-sort-asc"></i></a> <a href="{{route('ajaxlist.sortAsc', 'id')}}"><i class="fa fa-sort-desc"></i></a></div></th>
-            <th style="width:20%;">Name<div class="d-flex flex-column float-right"><a href="{{route('ajaxlist.sortDesc', 'name')}}"><i class="fa fa-sort-asc"></i></a> <a href="{{route('ajaxlist.sortAsc', 'name')}}"><i class="fa fa-sort-desc"></i></a></div></th>
-            <th style="width:25%;">Position<div class="d-flex flex-column float-right"><a href="{{route('ajaxlist.sortDesc', 'position')}}"><i class="fa fa-sort-asc"></i></a> <a href="{{route('ajaxlist.sortAsc', 'position')}}"><i class="fa fa-sort-desc"></i></a></div></th>
-            <th style="width:20%;">Hiring Date<div class="d-flex flex-column float-right"><a href="{{route('ajaxlist.sortDesc', 'hired_at')}}"><i class="fa fa-sort-asc"></i></a> <a href="{{route('ajaxlist.sortAsc', 'hired_at')}}"><i class="fa fa-sort-desc"></i></a></div></th>
-            <th style="width:5%;">Salary<div class="d-flex flex-column float-right"><a href="{{route('ajaxlist.sortDesc', 'salary')}}"><i class="fa fa-sort-asc"></i></a> <a href="{{route('ajaxlist.sortAsc', 'salary')}}"><i class="fa fa-sort-desc"></i></a></div></th>
-            <th style="width:15%;">Boss name<div class="d-flex flex-column float-right"><a href="{{route('ajaxlist.sortDesc', 'boss_id')}}"><i class="fa fa-sort-asc"></i></a> <a href="{{route('ajaxlist.sortAsc', 'boss_id')}}"><i class="fa fa-sort-desc"></i></a></div></th>
-            <th style="width:10%;"></th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach ($employees as $employee)
-            <tr>
-                <td>{{ $employee->id }}</td>
-                <td><a href="{{route('ajaxlist.show', $employee->id)}}">{{ $employee->name }}</a></td>
-                <td>{{ $employee->position }}</td>
-                <td>{{ $employee->hired_at }}</td>
-                <td>{{ $employee->salary }}</td>
-                <td> {{$employee->parent ? $employee->parent->name : ""}}</td>
+    {{--<pagination  ></pagination>--}}
+    <show-list :employees="{{json_encode($employees)}}" :pages="{{$pages}}"></show-list>
+    {{--<ajax-show-list></ajax-show-list>--}}
 
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-    {{ $employees->links() }}
+
+
+
+
+
+
 @endsection
+
+@section('scripts')
+    <script>
+
+
+    </script>
+@endsection
+
