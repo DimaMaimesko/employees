@@ -24,7 +24,7 @@ class AjaxEmployeesController extends Controller
 
     public function moreitems(Request $request)
     {
-        $query = Employee::orderBy('id');
+        $query = Employee::query();
         $filters = $request->input('body.filt');
         if (!empty($value = $filters['id'])) {
             $query->where('id', $value);
@@ -44,6 +44,7 @@ class AjaxEmployeesController extends Controller
         if (!empty($value = $filters['boss_id'])) {
             $query->where('boss_id', $value);
         }
+
         $pages = intval(ceil($query->count()/self::LIMIT));
         $page = $request->input('body.curpage');
         if($pages > 1){
@@ -51,10 +52,12 @@ class AjaxEmployeesController extends Controller
         }else{
             $offset = 0;
         }
-
-        $ids = $query->with('parent')->offset($offset)->limit(self::LIMIT)->pluck('id')->toArray();
-        $employees = Employee::whereIn('id', $ids)->get()->toArray();
-
+        $sortField = $request->input('body.sortField');
+        $sortDirection = $request->input('body.sortDirection');
+        if (!empty($sortDirection)) {
+            $query->orderBy($sortField, $sortDirection);
+        }
+        $employees = $query->with('parent')->offset($offset)->limit(self::LIMIT)->get()->toArray();
         return   compact(['employees', 'pages']);
 
     }

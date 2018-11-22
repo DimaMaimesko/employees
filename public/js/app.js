@@ -47288,7 +47288,7 @@ exports = module.exports = __webpack_require__(42)(false);
 
 
 // module
-exports.push([module.i, "\n.number {\n    color: #FFF;\n    background: #86c04b;\n    cursor: pointer;\n    text: #1c1c3d;\n}\n.number:hover, .number.active {\n    background: #3e8118;\n}\n.active {\n    background: #3e8118;\n}\n", ""]);
+exports.push([module.i, "\n.number {\n    color: #FFF;\n    background: #86c04b;\n    cursor: pointer;\n    text: #1c1c3d;\n}\n.number:hover, .number.active {\n    background: #3e8118;\n}\n.active {\n    background: #3e8118;\n}\n.sort-field:hover {\n    background: #658158;\n    cursor: pointer;\n}\n.arrow_down {\n    float: right;\n    width: 12px;\n    height: 15px;\n    background-repeat: no-repeat;\n    background-size: contain;\n    background-position-y: bottom;\n    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAaCAYAAABPY4eKAAAAAXNSR0IArs4c6QAAAvlJREFUSA29Vk1PGlEUHQaiiewslpUJiyYs2yb9AyRuJGm7c0VJoFXSX9A0sSZN04ULF12YEBQDhMCuSZOm1FhTiLY2Rky0QPlQBLRUsICoIN/0PCsGyox26NC3eTNn3r3n3TvnvvsE1PkwGo3yUqkkEQqFgw2Mz7lWqwng7ztN06mxsTEv8U0Aam5u7r5EInkplUol/f391wAJCc7nEAgE9Uwmkzo4OPiJMa1Wq6cFs7Ozt0H6RqlUDmJXfPIx+qrX69Ti4mIyHA5r6Wq1egND+j+IyW6QAUoul18XiUTDNHaSyGazKcZtdgk8wqhUKh9o/OMvsVgsfHJy0iWqVrcQNRUMBnd6enqc9MjISAmRP3e73T9al3XnbWNjIw2+KY1Gc3imsNHR0YV4PP5+d3e32h3K316TySQFoX2WyWR2glzIO5fLTSD6IElLNwbqnFpbWyO/96lCoai0cZjN5kfYQAYi5H34fL6cxWIZbya9iJyAhULBHAqFVlMpfsV/fHxMeb3er+Vy+VUzeduzwWC45XA4dlD/vEXvdDrj8DvURsYEWK3WF4FA4JQP9mg0WrHZbEYmnpa0NxYgPVObm5teiLABdTQT8a6vrwdRWhOcHMzMzCiXlpb2/yV6qDttMpkeshEzRk4Wo/bfoe4X9vb2amzGl+HoXNT29vZqsVi0sK1jJScG+Xx+HGkL4Tew2TPi5zUdQQt9otPpuBk3e0TaHmMDh1zS7/f780S0zX6Yni+NnBj09fUZUfvudDrNZN+GkQbl8Xi8RLRtHzsB9Hr9nfn5+SjSeWUCXC7XPq5kw53wsNogjZNohYXL2EljstvtrAL70/mVaW8Y4OidRO1/gwgbUMvcqGmcDc9aPvD1gnTeQ+0nmaInokRj0nHh+uvIiVOtVvt2a2vLv7Ky0tL3cRTXIcpPAwMDpq6R4/JXE4vFQ5FI5CN+QTaRSFCYc8vLy1l0rge4ARe5kJ/d27kYkLXoy2Jo4C7K8CZOsEBvb+9rlUp1xNXPL7v3IDwxvPD6AAAAAElFTkSuQmCC')\n}\n.arrow_up {\n    float: right;\n    width: 12px;\n    height: 15px;\n    background-repeat: no-repeat;\n    background-size: contain;\n    background-position-y: bottom;\n    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAaCAYAAACgoey0AAAAAXNSR0IArs4c6QAAAwpJREFUSA21Vt1PUmEYP4dvkQ8JFMwtBRocWAkDbiqXrUWXzU1rrTt0bdVqXbb1tbW16C9IBUSmm27cODdneoXjputa6069qwuW6IIBIdLvdaF4OAcOiGeDc87zPs/vd57P96WpFq7p6enbGo1mjKZpeTabjU1MTCRagGnOZHFxcXxtbe1XKpUq7+zslJeXl//Mz8+Hy+Uy3RxSE9qTk5M3otFooVQqgef4Wl9f343FYoEmoISrxuNxFX5f9vb2jhn/PxUKhfLS0tIPfFifUESRUMV8Pv/M6XReRm5rTGQyGeXxeGxYe1ezeBpBOBx2rKysbO7v79d4Wy3Y2Nj4GQqFbgnhaugxwiuGJx99Pp9FLBbXxYTXvTqd7v3MzIy6riIWGxJnMpl7AwMD14xGYyMsSq1WUyQdUqn0eSPlusQIsbGrq+vl4OCgvhFQZd1utyv1en0gEolcqsi47nWJlUrlG5fLZVcoFFy2nDKSDpIWlUoVTCQSEk4lCHmJMZ2GTCbTiMVikfIZ88l7enoos9l8dXt7+z6fDicxSJUokqDX6xXcl2wCROoc0vQCWL3sNfLOSdzR0fHY4XC4tVotl40gmVwup9xuN4OQv+UyqCFGH9rg7SOGYVRcBs3IEG4J0nVnamrqOtvuBDGGgQg9+wHFcVEi4a0LNkbdd6TrPKo8ODc311mteIIYjT/a398/jK+s1jnVM0kXoufCFvq0GuiIGEVgQIhfoygM1QrteEa9dAL7ITiYCt4RMabOK5AyKKzKWtvupLcRciu8D5J0EuDDPyT/Snd39yh6VtY2NhYQSR9G79Ds7OxdskRjEyAufvb7/cPoO5Z6e1+xtVKrq6vfcFzyi/A3ZrPZ3GdNSlwgo5ekE4X2RIQGf2C1WlufFE0GBeGWYQ8YERWLxQtnUVB830MKLZfL9RHir8lkssCn2G751tZWEWe03zTKm15YWPiEiXXTYDB0Ig/t7yd8PRws4EicwWHxO4jHD8/C5HiTTqd1BwcHFozKU89origB+y/kmzgYpgOBQP4fGmUiZmJ+WNgAAAAASUVORK5CYII=')\n}\n", ""]);
 
 // exports
 
@@ -47833,6 +47833,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['employees', 'pages'],
@@ -47847,7 +47865,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 hired_at: '',
                 salary: '',
                 boss_id: ''
-            }
+            },
+            sortId: 0,
+            sortName: 0,
+            sortPosition: 0,
+            sortSalary: 0,
+            sortDate: 0,
+            sortBoss: 0,
+            sortField: null,
+            sortDirection: null,
+            idClass: '',
+            nameClass: '',
+            positionClass: '',
+            salaryClass: '',
+            dateClass: '',
+            bossClass: ''
         };
     },
     methods: {
@@ -47859,7 +47891,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             console.log(this.filt);
-            axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt } }).then(function (responce) {
+            this.current = 1;
+            axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt, sortField: this.sortField, sortDirection: this.sortDirection } }).then(function (responce) {
                 console.log(responce.data);
                 _this.employees = responce.data.employees;
                 _this.pages = responce.data.pages;
@@ -47871,17 +47904,164 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             this.current = 1;
         }
+
     },
     watch: {
         current: function current() {
             var _this2 = this;
 
-            axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt } }).then(function (responce) {
+            axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt, sortField: this.sortField, sortDirection: this.sortDirection } }).then(function (responce) {
                 console.log(responce.data);
                 _this2.employees = responce.data.employees;
                 _this2.pages = responce.data.pages;
             });
+        },
+        sortId: function sortId() {
+            var _this3 = this;
+
+            this.nameClass = '';this.positionClass = '';this.salaryClass = '';this.dateClass = '';this.bossClass = '';
+            this.sortField = 'id';
+            if (this.sortId == 1) {
+                this.idClass = 'arrow_down';
+                this.sortDirection = 'asc';
+            }
+            if (this.sortId == 2) {
+                this.idClass = 'arrow_up';
+                this.sortDirection = 'desc';
+            }
+            if (this.sortId > 2) {
+                this.sortField = null;
+                this.sortId = 0;
+                this.sortDirection = null;
+                this.idClass = '';
+            };
+            axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt, sortField: this.sortField, sortDirection: this.sortDirection } }).then(function (responce) {
+                _this3.employees = responce.data.employees;
+                _this3.pages = responce.data.pages;
+            });
+        },
+        sortName: function sortName() {
+            var _this4 = this;
+
+            this.idClass = '';this.positionClass = '';this.salaryClass = '';this.dateClass = '';this.bossClass = '';
+            this.sortField = 'name';
+            if (this.sortName == 1) {
+                this.nameClass = 'arrow_down';
+                this.sortDirection = 'asc';
+            }
+            if (this.sortName == 2) {
+                this.nameClass = 'arrow_up';
+                this.sortDirection = 'desc';
+            }
+            if (this.sortName > 2) {
+                this.nameClass = '';
+                this.sortField = null;
+                this.sortName = 0;
+                this.sortDirection = null;
+            };
+            axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt, sortField: this.sortField, sortDirection: this.sortDirection } }).then(function (responce) {
+                _this4.employees = responce.data.employees;
+                _this4.pages = responce.data.pages;
+            });
+        },
+        sortPosition: function sortPosition() {
+            var _this5 = this;
+
+            this.idClass = '';this.nameClass = '';this.salaryClass = '';this.dateClass = '';this.bossClass = '';
+            this.sortField = 'position';
+            if (this.sortPosition == 1) {
+                this.positionClass = 'arrow_down';
+                this.sortDirection = 'asc';
+            }
+            if (this.sortPosition == 2) {
+                this.positionClass = 'arrow_up';
+                this.sortDirection = 'desc';
+            }
+            if (this.sortPosition > 2) {
+                this.positionClass = '';
+                this.sortField = null;
+                this.sortPosition = 0;
+                this.sortDirection = null;
+            };
+            axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt, sortField: this.sortField, sortDirection: this.sortDirection } }).then(function (responce) {
+                _this5.employees = responce.data.employees;
+                _this5.pages = responce.data.pages;
+            });
+        },
+        sortSalary: function sortSalary() {
+            var _this6 = this;
+
+            this.idClass = '';this.nameClass = '';this.positionClass = '';this.dateClass = '';this.bossClass = '';
+            this.sortField = 'salary';
+            if (this.sortSalary == 1) {
+                this.salaryClass = 'arrow_down';
+                this.sortDirection = 'asc';
+            }
+            if (this.sortSalary == 2) {
+                this.salaryClass = 'arrow_up';
+                this.sortDirection = 'desc';
+            }
+            if (this.sortSalary > 2) {
+                this.salaryClass = '';
+                this.sortField = null;
+                this.sortSalary = 0;
+                this.sortDirection = null;
+            };
+            axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt, sortField: this.sortField, sortDirection: this.sortDirection } }).then(function (responce) {
+                _this6.employees = responce.data.employees;
+                _this6.pages = responce.data.pages;
+            });
+        },
+        sortDate: function sortDate() {
+            var _this7 = this;
+
+            this.idClass = '';this.nameClass = '';this.positionClass = '';this.salaryClass = '';this.bossClass = '';
+            this.sortField = 'hired_at';
+            if (this.sortDate == 1) {
+                this.dateClass = 'arrow_down';
+                this.sortDirection = 'asc';
+            }
+            if (this.sortDate == 2) {
+                this.dateClass = 'arrow_up';
+                this.sortDirection = 'desc';
+            }
+            if (this.sortDate > 2) {
+                this.dateClass = '';
+                this.sortField = null;
+                this.sortDate = 0;
+                this.sortDirection = null;
+            };
+            axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt, sortField: this.sortField, sortDirection: this.sortDirection } }).then(function (responce) {
+                _this7.employees = responce.data.employees;
+                _this7.pages = responce.data.pages;
+            });
+        },
+        sortBoss: function sortBoss() {
+            var _this8 = this;
+
+            this.idClass = '';this.nameClass = '';this.positionClass = '';this.salaryClass = '';this.dateClass = '';
+            this.sortField = 'boss';
+            if (this.sortBoss == 1) {
+                this.bossClass = 'arrow_down';
+                this.sortDirection = 'asc';
+            }
+            if (this.sortBoss == 2) {
+                this.bossClass = 'arrow_up';
+                this.sortDirection = 'desc';
+            }
+            if (this.sortBoss > 2) {
+                this.bossClass = '';
+                this.sortField = null;
+                this.sortBoss = 0;
+                this.sortDirection = null;
+            };
+            axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt, sortField: this.sortField, sortDirection: this.sortDirection } }).then(function (responce) {
+                console.log(responce.data);
+                _this8.employees = responce.data.employees;
+                _this8.pages = responce.data.pages;
+            });
         }
+
     }
 });
 
@@ -48152,7 +48332,128 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("table", { staticClass: "table table-bordered table-striped" }, [
-        _vm._m(0),
+        _c("thead", [
+          _c("tr", { staticStyle: { background: "rgba(97,156,33,0.57)" } }, [
+            _c(
+              "th",
+              {
+                staticStyle: { width: "7%" },
+                on: {
+                  click: function($event) {
+                    _vm.sortId++
+                  }
+                }
+              },
+              [
+                _vm._v("ID" + _vm._s(_vm.sortId) + "\n                    "),
+                _c("div", {
+                  staticClass: "d-flex flex-column float-right",
+                  class: _vm.idClass
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              {
+                staticStyle: { width: "18%" },
+                on: {
+                  click: function($event) {
+                    _vm.sortName++
+                  }
+                }
+              },
+              [
+                _vm._v("Name\n                    "),
+                _c("div", {
+                  staticClass: "d-flex flex-column float-right",
+                  class: _vm.nameClass
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              {
+                staticStyle: { width: "25%" },
+                on: {
+                  click: function($event) {
+                    _vm.sortPosition++
+                  }
+                }
+              },
+              [
+                _vm._v(
+                  "Position" +
+                    _vm._s(_vm.sortPosition) +
+                    "\n                    "
+                ),
+                _c("div", {
+                  staticClass: "d-flex flex-column float-right",
+                  class: _vm.positionClass
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              {
+                staticClass: "sort-field",
+                staticStyle: { width: "20%" },
+                on: {
+                  click: function($event) {
+                    _vm.sortDate++
+                  }
+                }
+              },
+              [
+                _vm._v("Hiring Date\n                    "),
+                _c("div", {
+                  staticClass: "d-flex flex-column float-right",
+                  class: _vm.dateClass
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              {
+                staticStyle: { width: "5%" },
+                on: {
+                  click: function($event) {
+                    _vm.sortSalary++
+                  }
+                }
+              },
+              [
+                _vm._v("Salary\n                    "),
+                _c("div", {
+                  staticClass: "d-flex flex-column float-right",
+                  class: _vm.salaryClass
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              {
+                staticStyle: { width: "15%" },
+                on: {
+                  click: function($event) {
+                    _vm.sortBoss++
+                  }
+                }
+              },
+              [
+                _vm._v("Boss name\n                    "),
+                _c("div", {
+                  staticClass: "d-flex flex-column float-right",
+                  class: _vm.bossClass
+                })
+              ]
+            )
+          ])
+        ]),
         _vm._v(" "),
         _c(
           "tbody",
@@ -48220,28 +48521,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticStyle: { width: "5%" } }, [_vm._v("ID")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { width: "20%" } }, [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { width: "25%" } }, [_vm._v("Position")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { width: "20%" } }, [_vm._v("Hiring Date")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { width: "5%" } }, [_vm._v("Salary")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { width: "15%" } }, [_vm._v("Boss name")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
