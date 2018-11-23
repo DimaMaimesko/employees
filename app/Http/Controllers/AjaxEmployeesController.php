@@ -18,8 +18,9 @@ class AjaxEmployeesController extends Controller
         $query = Employee::orderBy('id');
         $ids = DB::table('employees')->limit(self::LIMIT)->pluck('id')->toArray();
         $employees = $query->with('parent')->whereIn('id', $ids)->get();
-        $pages = ceil(Employee::count()/self::LIMIT);
-        return  view('employees.ajaxlist.index', compact(['employees', 'pages']));
+        $totalRows = Employee::count();
+        $pages = ceil($totalRows/self::LIMIT);
+        return  view('employees.ajaxlist.index', compact(['employees', 'pages', 'totalRows']));
     }
 
     public function moreitems(Request $request)
@@ -44,8 +45,8 @@ class AjaxEmployeesController extends Controller
         if (!empty($value = $filters['boss_id'])) {
             $query->where('boss_id', $value);
         }
-
-        $pages = intval(ceil($query->count()/self::LIMIT));
+        $totalRows = $query->count();
+        $pages = intval(ceil($totalRows/self::LIMIT));
         $page = $request->input('body.curpage');
         if($pages > 1){
             $offset = $page*self::LIMIT - self::LIMIT;
@@ -58,41 +59,10 @@ class AjaxEmployeesController extends Controller
             $query->orderBy($sortField, $sortDirection);
         }
         $employees = $query->with('parent')->offset($offset)->limit(self::LIMIT)->get()->toArray();
-        return   compact(['employees', 'pages']);
+        return   compact(['employees', 'pages', 'totalRows']);
 
     }
 
-//    public function moreitemsfilter(Request $request)
-//    {
-//        $query = Employee::orderBy('id');
-//        $filters = $request->input('body.filt');
-//        if (!empty($value = $filters['id'])) {
-//            $query->where('id', $value);
-//        }
-//        if (!empty($value = $filters['name'])) {
-//            $query->where('name', $value);
-//        }
-//        if (!empty($value = $filters['position'])) {
-//            $query->where('position', $value);
-//        }
-//        if (!empty($value = $filters['hired_at'])) {
-//            $query->where('hired_at', $value);
-//        }
-//        if (!empty($value = $filters['salary'])) {
-//            $query->where('salary', $value);
-//        }
-//        if (!empty($value = $filters['boss_id'])) {
-//            $query->where('boss_id', $value);
-//        }
-//
-//        $page = $request->input('body.curpage');
-//        $offset = $page*self::LIMIT - self::LIMIT;
-//        $ids = DB::table('employees')->offset($offset)->limit(self::LIMIT)->pluck('id')->toArray();
-//        $employees = $query->with('parent')->whereIn('id', $ids)->get()->toArray();
-//        $pages = ceil(Employee::count()/self::LIMIT);
-//        return   compact(['employees', 'pages']);
-//
-//    }
 
     public function create()
     {

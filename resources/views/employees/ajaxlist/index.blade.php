@@ -19,7 +19,7 @@
     </div>
 
 
-    <show-list :employees="{{json_encode($employees)}}" :pages="{{$pages}}"></show-list>
+    <show-list :employees="{{json_encode($employees)}}" :pages="{{$pages}}" :totalRows="{{$totalRows}}"></show-list>
 
 @endsection
 

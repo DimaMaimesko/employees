@@ -47851,11 +47851,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['employees', 'pages'],
+    props: ['employees', 'pages', 'totalRows'],
     data: function data() {
         return {
+            employeesLocal: this.employees,
+            pagesLocal: this.pages,
+            totalRowsLocal: this.totalRows,
             page: 1,
             current: 1,
             filt: {
@@ -47879,23 +47885,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             positionClass: '',
             salaryClass: '',
             dateClass: '',
-            bossClass: ''
+            bossClass: '',
+            isRefreshing: false
         };
     },
     methods: {
         changed: function changed(event) {
             this.page = this.current = event.target.text;
-            console.log(this.pages);
+            console.log(this.pagesLocal);
         },
         submitted: function submitted() {
             var _this = this;
 
-            console.log(this.filt);
+            this.isRefreshing = true;
             this.current = 1;
             axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt, sortField: this.sortField, sortDirection: this.sortDirection } }).then(function (responce) {
-                console.log(responce.data);
-                _this.employees = responce.data.employees;
-                _this.pages = responce.data.pages;
+                _this.isRefreshing = false;
+                _this.employeesLocal = responce.data.employees;
+                _this.pagesLocal = responce.data.pages;
+                _this.totalRowsLocal = responce.data.totalRows;
             });
         },
         resetFilter: function resetFilter() {
@@ -47903,17 +47911,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.filt[key] = '';
             }
             this.current = 1;
+        },
+        employeeProfile: function employeeProfile(id) {
+            window.location.href = '/list/' + id;
         }
-
     },
     watch: {
         current: function current() {
             var _this2 = this;
 
+            this.isRefreshing = true;
             axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt, sortField: this.sortField, sortDirection: this.sortDirection } }).then(function (responce) {
-                console.log(responce.data);
-                _this2.employees = responce.data.employees;
-                _this2.pages = responce.data.pages;
+                _this2.isRefreshing = false;
+                _this2.employeesLocal = responce.data.employees;
+                _this2.pagesLocal = responce.data.pages;
+                _this2.totalRowsLocal = responce.data.totalRows;
             });
         },
         sortId: function sortId() {
@@ -47935,9 +47947,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.sortDirection = null;
                 this.idClass = '';
             };
+            this.isRefreshing = true;
             axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt, sortField: this.sortField, sortDirection: this.sortDirection } }).then(function (responce) {
-                _this3.employees = responce.data.employees;
-                _this3.pages = responce.data.pages;
+                _this3.isRefreshing = false;
+                _this3.employeesLocal = responce.data.employees;
+                _this3.pagesLocal = responce.data.pages;
+                _this3.totalRowsLocal = responce.data.totalRows;
             });
         },
         sortName: function sortName() {
@@ -47959,9 +47974,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.sortName = 0;
                 this.sortDirection = null;
             };
+            this.isRefreshing = true;
             axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt, sortField: this.sortField, sortDirection: this.sortDirection } }).then(function (responce) {
-                _this4.employees = responce.data.employees;
-                _this4.pages = responce.data.pages;
+                _this4.isRefreshing = false;
+                _this4.employeesLocal = responce.data.employees;
+                _this4.pagesLocal = responce.data.pages;
+                _this4.totalRowsLocal = responce.data.totalRows;
             });
         },
         sortPosition: function sortPosition() {
@@ -47983,9 +48001,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.sortPosition = 0;
                 this.sortDirection = null;
             };
+            this.isRefreshing = true;
             axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt, sortField: this.sortField, sortDirection: this.sortDirection } }).then(function (responce) {
-                _this5.employees = responce.data.employees;
-                _this5.pages = responce.data.pages;
+                _this5.isRefreshing = false;
+                _this5.employeesLocal = responce.data.employees;
+                _this5.pagesLocal = responce.data.pages;
+                _this5.totalRowsLocal = responce.data.totalRows;
             });
         },
         sortSalary: function sortSalary() {
@@ -48007,9 +48028,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.sortSalary = 0;
                 this.sortDirection = null;
             };
+            this.isRefreshing = true;
             axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt, sortField: this.sortField, sortDirection: this.sortDirection } }).then(function (responce) {
-                _this6.employees = responce.data.employees;
-                _this6.pages = responce.data.pages;
+                _this6.isRefreshing = false;
+                _this6.employeesLocal = responce.data.employees;
+                _this6.pagesLocal = responce.data.pages;
+                _this6.totalRowsLocal = responce.data.totalRows;
             });
         },
         sortDate: function sortDate() {
@@ -48031,9 +48055,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.sortDate = 0;
                 this.sortDirection = null;
             };
+            this.isRefreshing = true;
             axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt, sortField: this.sortField, sortDirection: this.sortDirection } }).then(function (responce) {
-                _this7.employees = responce.data.employees;
-                _this7.pages = responce.data.pages;
+                _this7.isRefreshing = false;
+                _this7.employeesLocal = responce.data.employees;
+                _this7.pagesLocal = responce.data.pages;
+                _this7.totalRowsLocal = responce.data.totalRows;
             });
         },
         sortBoss: function sortBoss() {
@@ -48055,10 +48082,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.sortBoss = 0;
                 this.sortDirection = null;
             };
+            this.isRefreshing = true;
             axios.post('ajaxlist/moreitems', { body: { curpage: this.current, filt: this.filt, sortField: this.sortField, sortDirection: this.sortDirection } }).then(function (responce) {
-                console.log(responce.data);
-                _this8.employees = responce.data.employees;
-                _this8.pages = responce.data.pages;
+                _this8.isRefreshing = false;
+                _this8.employeesLocal = responce.data.employees;
+                _this8.pagesLocal = responce.data.pages;
+                _this8.totalRowsLocal = responce.data.totalRows;
             });
         }
 
@@ -48330,13 +48359,32 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
+    _vm.totalRowsLocal > 1
+      ? _c("p", { staticClass: "text-center" }, [
+          _vm._v(_vm._s(_vm.totalRowsLocal) + " elements found")
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.totalRowsLocal == 1
+      ? _c("p", { staticClass: "text-center" }, [
+          _vm._v(_vm._s(_vm.totalRowsLocal) + " element found")
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _c("div", { staticClass: "row justify-content-center" }, [
+      _vm.isRefreshing
+        ? _c("span", { staticClass: "badge badge-primary mb-1" }, [
+            _vm._v("Updating...")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _c("table", { staticClass: "table table-bordered table-striped" }, [
         _c("thead", [
           _c("tr", { staticStyle: { background: "rgba(97,156,33,0.57)" } }, [
             _c(
               "th",
               {
+                staticClass: "sort-field",
                 staticStyle: { width: "7%" },
                 on: {
                   click: function($event) {
@@ -48345,7 +48393,7 @@ var render = function() {
                 }
               },
               [
-                _vm._v("ID" + _vm._s(_vm.sortId) + "\n                    "),
+                _vm._v("ID\n                    "),
                 _c("div", {
                   staticClass: "d-flex flex-column float-right",
                   class: _vm.idClass
@@ -48356,6 +48404,7 @@ var render = function() {
             _c(
               "th",
               {
+                staticClass: "sort-field",
                 staticStyle: { width: "18%" },
                 on: {
                   click: function($event) {
@@ -48375,6 +48424,7 @@ var render = function() {
             _c(
               "th",
               {
+                staticClass: "sort-field",
                 staticStyle: { width: "25%" },
                 on: {
                   click: function($event) {
@@ -48383,11 +48433,7 @@ var render = function() {
                 }
               },
               [
-                _vm._v(
-                  "Position" +
-                    _vm._s(_vm.sortPosition) +
-                    "\n                    "
-                ),
+                _vm._v("Position\n                    "),
                 _c("div", {
                   staticClass: "d-flex flex-column float-right",
                   class: _vm.positionClass
@@ -48418,6 +48464,7 @@ var render = function() {
             _c(
               "th",
               {
+                staticClass: "sort-field",
                 staticStyle: { width: "5%" },
                 on: {
                   click: function($event) {
@@ -48437,6 +48484,7 @@ var render = function() {
             _c(
               "th",
               {
+                staticClass: "sort-field",
                 staticStyle: { width: "15%" },
                 on: {
                   click: function($event) {
@@ -48457,11 +48505,22 @@ var render = function() {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.employees, function(employee) {
+          _vm._l(_vm.employeesLocal, function(employee) {
             return _c("tr", [
               _c("td", [_vm._v(_vm._s(employee.id))]),
               _vm._v(" "),
-              _c("td"),
+              _c(
+                "td",
+                {
+                  staticClass: "sort-field",
+                  on: {
+                    click: function($event) {
+                      _vm.employeeProfile(employee.id)
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(employee.name))]
+              ),
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(employee.position))]),
               _vm._v(" "),
@@ -48485,7 +48544,7 @@ var render = function() {
         _c(
           "ul",
           { staticClass: "pagination" },
-          _vm._l(_vm.pages, function(page) {
+          _vm._l(_vm.pagesLocal, function(page) {
             return _c("li", { key: page, staticClass: "page-item" }, [
               _vm.current != page &&
               (page <= 5 ||

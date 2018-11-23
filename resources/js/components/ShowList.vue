@@ -39,19 +39,22 @@
                 </form>
             </div>
         </div>
+        <p class="text-center"  v-if="totalRowsLocal > 1">{{ totalRowsLocal }} elements found</p>
+        <p class="text-center"  v-if="totalRowsLocal == 1">{{ totalRowsLocal }} element found</p>
         <div class="row justify-content-center">
+            <span v-if="isRefreshing" class="badge badge-primary mb-1">Updating...</span>
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr style="background: rgba(97,156,33,0.57);">
-                    <th @click="sortId++" style="width:7%;">ID
+                    <th @click="sortId++" class="sort-field" style="width:7%;">ID
                         <div :class="idClass" class="d-flex flex-column float-right">
                         </div>
                     </th>
-                    <th @click="sortName++" style="width:18%;">Name
+                    <th @click="sortName++" class="sort-field" style="width:18%;">Name
                         <div :class="nameClass" class="d-flex flex-column float-right">
                         </div>
                     </th>
-                    <th @click="sortPosition++" style="width:25%;">Position
+                    <th @click="sortPosition++" class="sort-field" style="width:25%;">Position
                         <div :class="positionClass" class="d-flex flex-column float-right">
                         </div>
                     </th>
@@ -59,20 +62,20 @@
                         <div :class="dateClass" class="d-flex flex-column float-right">
                         </div>
                     </th>
-                    <th @click="sortSalary++" style="width:5%;">Salary
+                    <th @click="sortSalary++" class="sort-field" style="width:5%;">Salary
                         <div :class="salaryClass" class="d-flex flex-column float-right">
                         </div>
                     </th>
-                    <th @click="sortBoss++" style="width:15%;">Boss name
+                    <th @click="sortBoss++" class="sort-field" style="width:15%;">Boss name
                         <div :class="bossClass" class="d-flex flex-column float-right">
                         </div>
                     </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="employee in employees">
+                <tr v-for="employee in employeesLocal">
                     <td>{{employee.id }}</td>
-                    <td></td>
+                    <td class="sort-field" @click="employeeProfile(employee.id)">{{ employee.name }}</td>
                     <td>{{ employee.position }}</td>
                     <td>{{ employee.hired_at }}</td>
                     <td>{{ employee.salary }}</td>
@@ -84,7 +87,7 @@
         <div class="container">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <li  class="page-item" v-for="page in pages" :key="page">
+                    <li  class="page-item" v-for="page in pagesLocal" :key="page">
                         <a @click="changed"
                             v-if="(current != page)&&((page <= 5)||(page > pages-5)||((current > page-3)&&(current < page+3)))"
                             class="page-link number">{{page}}</a>
@@ -101,10 +104,13 @@
 <script>
     export default {
         props: [
-            'employees', 'pages'
+            'employees', 'pages', 'totalRows'
         ],
         data: function () {
             return {
+                employeesLocal: this.employees,
+                pagesLocal: this.pages,
+                totalRowsLocal: this.totalRows,
                 page: 1,
                 current: 1,
                 filt: {
@@ -129,20 +135,22 @@
                 salaryClass: '',
                 dateClass: '',
                 bossClass: '',
+                isRefreshing: false,
             }
         },
         methods: {
             changed: function (event) {
                 this.page = this.current = event.target.text;
-                console.log(this.pages);
+                console.log(this.pagesLocal);
             },
             submitted: function(){
-                console.log(this.filt);
+                this.isRefreshing = true;
                 this.current = 1;
                 axios.post('ajaxlist/moreitems',{  body: {curpage:this.current, filt:this.filt , sortField: this.sortField, sortDirection:this.sortDirection}  }).then((responce) => {
-                    console.log(responce.data);
-                    this.employees = responce.data.employees;
-                    this.pages = responce.data.pages;
+                    this.isRefreshing = false;
+                    this.employeesLocal = responce.data.employees;
+                    this.pagesLocal = responce.data.pages;
+                    this.totalRowsLocal = responce.data.totalRows;
                 });
 
             },
@@ -152,14 +160,19 @@
                 }
                 this.current = 1;
             },
+            employeeProfile(id){
+                window.location.href = '/list/' + id;
+            }
 
         },
         watch: {
             current: function() {
+                this.isRefreshing = true;
                 axios.post('ajaxlist/moreitems',{  body: {curpage:this.current, filt:this.filt, sortField: this.sortField, sortDirection:this.sortDirection}  }).then((responce) => {
-                    console.log(responce.data);
-                    this.employees = responce.data.employees;
-                    this.pages = responce.data.pages;
+                    this.isRefreshing = false;
+                    this.employeesLocal = responce.data.employees;
+                    this.pagesLocal = responce.data.pages;
+                    this.totalRowsLocal = responce.data.totalRows;
                 });
             },
             sortId: function() {
@@ -179,9 +192,12 @@
                     this.sortDirection = null;
                     this.idClass = '';
                 };
+                this.isRefreshing = true;
                 axios.post('ajaxlist/moreitems',{  body: {curpage:this.current, filt:this.filt, sortField: this.sortField, sortDirection:this.sortDirection}  }).then((responce) => {
-                    this.employees = responce.data.employees;
-                    this.pages = responce.data.pages;
+                    this.isRefreshing = false;
+                    this.employeesLocal = responce.data.employees;
+                    this.pagesLocal = responce.data.pages;
+                    this.totalRowsLocal = responce.data.totalRows;
                 });
             },
             sortName: function() {
@@ -201,9 +217,12 @@
                     this.sortName = 0;
                     this.sortDirection = null;
                 };
+                this.isRefreshing = true;
                 axios.post('ajaxlist/moreitems',{  body: {curpage:this.current, filt:this.filt, sortField:this.sortField, sortDirection:this.sortDirection}  }).then((responce) => {
-                    this.employees = responce.data.employees;
-                    this.pages = responce.data.pages;
+                    this.isRefreshing = false;
+                    this.employeesLocal = responce.data.employees;
+                    this.pagesLocal = responce.data.pages;
+                    this.totalRowsLocal = responce.data.totalRows;
                 });
             },
             sortPosition: function() {
@@ -223,9 +242,12 @@
                     this.sortPosition = 0;
                     this.sortDirection = null;
                 };
+                this.isRefreshing = true;
                 axios.post('ajaxlist/moreitems',{  body: {curpage:this.current, filt:this.filt, sortField:this.sortField, sortDirection:this.sortDirection}  }).then((responce) => {
-                    this.employees = responce.data.employees;
-                    this.pages = responce.data.pages;
+                    this.isRefreshing = false;
+                    this.employeesLocal = responce.data.employees;
+                    this.pagesLocal = responce.data.pages;
+                    this.totalRowsLocal = responce.data.totalRows;
                 });
             },
             sortSalary: function() {
@@ -245,9 +267,12 @@
                     this.sortSalary = 0;
                     this.sortDirection = null;
                 };
+                this.isRefreshing = true;
                 axios.post('ajaxlist/moreitems',{  body: {curpage:this.current, filt:this.filt, sortField:this.sortField, sortDirection:this.sortDirection}  }).then((responce) => {
-                    this.employees = responce.data.employees;
-                    this.pages = responce.data.pages;
+                    this.isRefreshing = false;
+                    this.employeesLocal = responce.data.employees;
+                    this.pagesLocal = responce.data.pages;
+                    this.totalRowsLocal = responce.data.totalRows;
                 });
             },
             sortDate: function() {
@@ -267,9 +292,12 @@
                     this.sortDate = 0;
                     this.sortDirection = null;
                 };
+                this.isRefreshing = true;
                 axios.post('ajaxlist/moreitems',{  body: {curpage:this.current, filt:this.filt, sortField:this.sortField, sortDirection:this.sortDirection}  }).then((responce) => {
-                    this.employees = responce.data.employees;
-                    this.pages = responce.data.pages;
+                    this.isRefreshing = false;
+                    this.employeesLocal = responce.data.employees;
+                    this.pagesLocal = responce.data.pages;
+                    this.totalRowsLocal = responce.data.totalRows;
                 });
             },
             sortBoss: function() {
@@ -289,10 +317,12 @@
                     this.sortBoss = 0;
                     this.sortDirection = null;
                 };
+                this.isRefreshing = true;
                 axios.post('ajaxlist/moreitems',{  body: {curpage:this.current, filt:this.filt, sortField:this.sortField, sortDirection:this.sortDirection}  }).then((responce) => {
-                    console.log(responce.data);
-                    this.employees = responce.data.employees;
-                    this.pages = responce.data.pages;
+                    this.isRefreshing = false;
+                    this.employeesLocal = responce.data.employees;
+                    this.pagesLocal = responce.data.pages;
+                    this.totalRowsLocal = responce.data.totalRows;
                 });
             },
 
