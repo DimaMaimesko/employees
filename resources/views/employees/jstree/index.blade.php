@@ -53,14 +53,24 @@
             "core" : {
                 "animation" : 0,
                 "check_callback" : true,
-                "themes" : { "stripes" : true, "variant" : "large" },
+                "themes" : { "stripes" : true, "variant" : "large"},
                 'data' : [
+
                         @foreach($employees as $employee)
                             { "id" : "{{ $employee->id }}",
                               "parent" : "@if(!empty($employee->boss_id)){{ $employee->boss_id }}@else#@endif",
-                              "text" : "{{$employee->id}} <strong>{{ $employee->name }}</strong>  ({{$employee->position}})(<strong>{{$employee->sort}}</string>)" , state : {opened : false, selected: false },
+                              "text" : "{{$employee->id}} <strong>{{ $employee->name }}</strong>  ({{$employee->position}})" , state : {opened : false, selected: false },
                             },
+                            @if (isset($employee->children))
+                                @foreach($employee->children as $child)
+                                    { "id" : "{{ $child->id }}",
+                                        "parent" : "@if(!empty($child->boss_id)){{ $child->boss_id }}@else#@endif",
+                                        "text" : "{{$child->id}} <strong>{{ $child->name }}</strong>  ({{$child->position}})" , state : {opened : false, selected: false },
+                                    },
+                                @endforeach
+                            @endif
                         @endforeach
+
                 ],
                 'deselect_all' : false,
                 "multiple" : true,
@@ -78,10 +88,6 @@
                 "default": {
                     "valid_children": ["default", "file"],
                 },
-                // "file": {
-                //     "icon": "glyphicon glyphicon-file",
-                //     "valid_children": []
-                // }
             },
             "plugins" : [
                 "types", "dnd"
@@ -91,15 +97,18 @@
         $('.card-body').hide();
 
         $('#js_tree').on("select_node.jstree", function (e, data) {
-            axios.post('{{route('jstree.show')}}', {'nodeId': data.node.id})
+            axios.post('{{route('jstree.add.node')}}', {'nodeId': data.node.id})
                 .then( function (res) {
-                  if (res.data.employee.id) $('.card-body').show();
-                  $('#id').text(res.data.employee.id);
-                  $('#name').text(res.data.employee.name);
-                  $('#position').text(res.data.employee.position);
-                  $('#hiring_date').text(res.data.employee.hired_at);
-                  $('#salary').text(res.data.employee.salary);
-                  $('#boss_name').text(res.data.bossName);
+                    console.log(res.data.emp);
+                    if (res.data.enableNodeAddition){
+                        res.data.emp.forEach(function(element){
+                            $('#js_tree').jstree().create_node(data.node.id, element, 'last');
+                        })
+                    }else{
+                        alert('Already loaded!');
+                    }
+
+
                 });
         });
 
@@ -122,9 +131,22 @@
                     }
             )
                 .fail(function () {
-                    data.instance.refresh();
                 });
         });
+
+        {{--$('#js_tree').on("select_node.jstree", function (e, data) {--}}
+        {{--axios.post('{{route('jstree.show')}}', {'nodeId': data.node.id})--}}
+        {{--.then( function (res) {--}}
+        {{--if (res.data.employee.id) $('.card-body').show();--}}
+        {{--$('#id').text(res.data.employee.id);--}}
+        {{--$('#name').text(res.data.employee.name);--}}
+        {{--$('#position').text(res.data.employee.position);--}}
+        {{--$('#hiring_date').text(res.data.employee.hired_at);--}}
+        {{--$('#salary').text(res.data.employee.salary);--}}
+        {{--$('#boss_name').text(res.data.bossName);--}}
+
+        {{--});--}}
+        {{--});--}}
 
     </script>
 @endsection

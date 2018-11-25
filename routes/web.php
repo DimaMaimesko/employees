@@ -60,5 +60,6 @@ Route::group([
         Route::get('/', 'JstreeController@index')->name('index');
         Route::post('/', 'JstreeController@sort')->name('sort');
         Route::post('/show', 'JstreeController@show')->name('show');
+        Route::post('/add-node', 'JstreeController@addNode')->name('add.node');
 
     });
