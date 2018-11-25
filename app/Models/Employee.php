@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
 
-    protected $fillable = ['name','department','position','salary','hired_at', 'boss_id', 'sort'];
+    protected $fillable = ['name','department','position','salary','hired_at', 'boss_id', 'sort', 'photo'];
 
     public function parent(){
         return $this->belongsTo(static::class, 'boss_id', 'id');

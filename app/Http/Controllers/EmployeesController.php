@@ -6,6 +6,7 @@ use App\Models\Employee;
 use App\Http\Requests\EmployeeCreateRequest;
 use App\Http\Requests\EmployeeUpdateRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EmployeesController extends Controller
 {
@@ -45,12 +46,22 @@ class EmployeesController extends Controller
 
     public function store(EmployeeCreateRequest $request)
     {
+        $file = $request->file('picture');
+        dump($request->file('picture'));
+        $pathToStorage = 'public/employees';
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $path = $file->storeAs($pathToStorage, $filename, 's3');
+        Storage::disk('s3')->setVisibility($path, 'public');
+        $url = Storage::disk('s3')->url($path);
+        $pathToDb = $url;
+//        Storage::makeDirectory($pathToStorage);
         $employee = Employee::create([
             'name' => $request->name,
             'position' => $request->position,
             'salary' => $request->salary,
             'boss_id' => isset($request->boss_id) ? $request->boss_id : null,
             'hired_at' => now(),
+            'photo' => $pathToDb,
         ]);
         return redirect()->route('list.show', $employee)->with('success','New employee created successfully!');
 

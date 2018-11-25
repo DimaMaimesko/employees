@@ -17,6 +17,7 @@ class EmployeeCreateRequest extends FormRequest
             'name' => 'required|string',
             'position' => 'required|string',
             'salary' => 'required|string',
+            'picture.*' => 'required|max:5000',
         ];
     }
 }

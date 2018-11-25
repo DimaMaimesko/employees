@@ -3,7 +3,7 @@
 @section('content')
     @include('employees.list._nav')
 
-    {!! Form::open(['url' => route('list.store'),'method'=>'POST','autocomplete'=>'off']) !!}
+    {!! Form::open(['url' => route('list.store'),'method'=>'POST','autocomplete'=>'off',  'enctype'=>"multipart/form-data"]) !!}
     <br>
     <div class="form-group">
         <label>Employee Name</label>
@@ -20,6 +20,10 @@
     <div class="form-group">
         <label>Boss Id</label>
         {!! Form::text('boss_id',isset($boss_id) ? $boss_id : old('boss_id'),['class'=>'form-control','placeholder'=>'Boss id']) !!}
+    </div>
+    <div class="form-group">
+        <label>Photo</label>
+        {!! Form::file('picture',['class'=>'form-control']) !!}
     </div>
 
     <button type="submit" class="btn btn-success text-uppercase"><i class="fa fa-save"></i> Save</button>

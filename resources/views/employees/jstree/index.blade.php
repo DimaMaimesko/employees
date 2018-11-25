@@ -61,14 +61,14 @@
                               "parent" : "@if(!empty($employee->boss_id)){{ $employee->boss_id }}@else#@endif",
                               "text" : "{{$employee->id}} <strong>{{ $employee->name }}</strong>  ({{$employee->position}})" , state : {opened : false, selected: false },
                             },
-                            @if (isset($employee->children))
-                                @foreach($employee->children as $child)
-                                    { "id" : "{{ $child->id }}",
-                                        "parent" : "@if(!empty($child->boss_id)){{ $child->boss_id }}@else#@endif",
-                                        "text" : "{{$child->id}} <strong>{{ $child->name }}</strong>  ({{$child->position}})" , state : {opened : false, selected: false },
-                                    },
-                                @endforeach
-                            @endif
+                            {{--@if (isset($employee->children))--}}
+                                {{--@foreach($employee->children as $child)--}}
+                                    {{--{ "id" : "{{ $child->id }}",--}}
+                                        {{--"parent" : "@if(!empty($child->boss_id)){{ $child->boss_id }}@else#@endif",--}}
+                                        {{--"text" : "{{$child->id}} <strong>{{ $child->name }}</strong>  ({{$child->position}})" , state : {opened : false, selected: false },--}}
+                                    {{--},--}}
+                                {{--@endforeach--}}
+                            {{--@endif--}}
                         @endforeach
 
                 ],
@@ -80,13 +80,15 @@
                     "max_children": 1,
                     "max_depth": 5,
                     "valid_children": ["root"],
+                    "icon": "tree_icon.png",
                 },
                 "root": {
-                    "icon": "/static/3.3.7/assets/images/tree_icon.png",
+                    "icon": "tree_icon.png",
                     "valid_children": ["default"],
                 },
                 "default": {
                     "valid_children": ["default", "file"],
+                    "icon": "tree_icon.png",
                 },
             },
             "plugins" : [
@@ -101,11 +103,14 @@
                 .then( function (res) {
                     console.log(res.data.emp);
                     if (res.data.enableNodeAddition){
+                        let node = $('#js_tree').jstree().get_node(data.node.id);
+                        node.state.opened = true;
                         res.data.emp.forEach(function(element){
                             $('#js_tree').jstree().create_node(data.node.id, element, 'last');
+                            // $("#js_tree").jstree(true).set_icon(data.node.id, "/groot.jpg");
                         })
                     }else{
-                        alert('Already loaded!');
+                        // alert('Already loaded!');
                     }
 
 
@@ -129,24 +134,23 @@
                     function(data,status,xhr){
                         console.log(status);
                     }
-            )
-                .fail(function () {
+            ).fail(function () {
                 });
         });
 
-        {{--$('#js_tree').on("select_node.jstree", function (e, data) {--}}
-        {{--axios.post('{{route('jstree.show')}}', {'nodeId': data.node.id})--}}
-        {{--.then( function (res) {--}}
-        {{--if (res.data.employee.id) $('.card-body').show();--}}
-        {{--$('#id').text(res.data.employee.id);--}}
-        {{--$('#name').text(res.data.employee.name);--}}
-        {{--$('#position').text(res.data.employee.position);--}}
-        {{--$('#hiring_date').text(res.data.employee.hired_at);--}}
-        {{--$('#salary').text(res.data.employee.salary);--}}
-        {{--$('#boss_name').text(res.data.bossName);--}}
+        $('#js_tree').on("select_node.jstree", function (e, data) {
+        axios.post('{{route('jstree.show')}}', {'nodeId': data.node.id})
+            .then( function (res) {
+                if (res.data.employee.id) $('.card-body').show();
+                $('#id').text(res.data.employee.id);
+                $('#name').text(res.data.employee.name);
+                $('#position').text(res.data.employee.position);
+                $('#hiring_date').text(res.data.employee.hired_at);
+                $('#salary').text(res.data.employee.salary);
+                $('#boss_name').text(res.data.bossName);
 
-        {{--});--}}
-        {{--});--}}
+            });
+        });
 
     </script>
 @endsection

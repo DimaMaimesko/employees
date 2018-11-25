@@ -3,7 +3,20 @@
 @section('content')
     @include('employees.list._nav')
 
-    {!! Form::open(['url' => route('list.update', $employee->id),'method'=>'PUT','autocomplete'=>'off']) !!}
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="img-thumbnail m-md-2">
+                <a href="{{asset($employee->photo)}}">
+                    <img src="{{asset($employee->photo)}}" alt="Photo" style="width:100%">
+
+                </a>
+            </div>
+        </div>
+
+    </div>
+    {!! Form::open(['url' => route('list.update', $employee->id),'method'=>'PUT','autocomplete'=>'off',  'enctype'=>"multipart/form-data"]) !!}
     <br>
     <div class="form-group">
         <label>Employee Name</label>

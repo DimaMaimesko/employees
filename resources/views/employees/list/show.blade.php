@@ -11,7 +11,18 @@
             <button class="btn btn-danger">Delete</button>
         </form>
     </div>
+    <div class="row">
 
+        <div class="col-md-4">
+            <div class="img-thumbnail m-md-2">
+                <a href="{{asset($employee->photo)}}">
+                    <img src="{{asset($employee->photo)}}" alt="Photo" style="width:100%">
+
+                </a>
+            </div>
+        </div>
+
+    </div>
     <table class="table table-bordered table-striped">
         <tbody>
             <tr>
