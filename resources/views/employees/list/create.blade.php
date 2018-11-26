@@ -23,7 +23,7 @@
     </div>
     <div class="form-group">
         <label>Photo</label>
-        {!! Form::file('picture',['class'=>'form-control']) !!}
+        {!! Form::file('photo',['class'=>'form-control']) !!}
     </div>
 
     <button type="submit" class="btn btn-success text-uppercase"><i class="fa fa-save"></i> Save</button>

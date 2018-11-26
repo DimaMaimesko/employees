@@ -46,8 +46,7 @@ class EmployeesController extends Controller
 
     public function store(EmployeeCreateRequest $request)
     {
-        $file = $request->file('picture');
-        dump($request->file('picture'));
+        $file = $request->file('photo');
         $pathToStorage = 'public/employees';
         $filename = time() . '_' . $file->getClientOriginalName();
         $path = $file->storeAs($pathToStorage, $filename, 's3');
@@ -83,7 +82,14 @@ class EmployeesController extends Controller
     public function update(EmployeeUpdateRequest $request, $id)
     {
         $employee = Employee::find($id);
-        $employee->update($request->input());
+        $file = $request->file('photo');
+        $pathToStorage = 'public/employees';
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $path = $file->storeAs($pathToStorage, $filename, 's3');
+        Storage::disk('s3')->setVisibility($path, 'public');
+        $url = Storage::disk('s3')->url($path);
+        $pathToDb = $url;
+        $employee->update([$request->input(), 'photo' => $pathToDb]);
         return  redirect()->route('list.show', $employee)->with('success','Employee ' .$employee->name . ' updated successfully!');
     }
 

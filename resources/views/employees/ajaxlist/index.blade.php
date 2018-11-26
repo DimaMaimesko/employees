@@ -10,7 +10,7 @@
         </div>
         <div class="col-6 col-md-4 col-lg-2">
             <p>
-                <a href="{{route('ajaxlist.create')}}" class="btn btn-success text-uppercase">
+                <a href="{{route('list.create')}}" class="btn btn-success text-uppercase">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     Add New Employee
                 </a>

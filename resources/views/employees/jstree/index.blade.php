@@ -10,6 +10,11 @@
                     <div class="card card-default">
                         <div class="card-header">Employee Info</div>
                         <div class="card-body">
+                                    <div id="photo" class="img-thumbnail">
+                                        <a href="">
+                                            <img src="" alt="Photo" style="width:100%">
+                                        </a>
+                                    </div>
                             <table class="table table-bordered table-striped">
                                 <tbody>
                                 <tr>
@@ -142,13 +147,17 @@
         axios.post('{{route('jstree.show')}}', {'nodeId': data.node.id})
             .then( function (res) {
                 if (res.data.employee.id) $('.card-body').show();
+                if (!res.data.employee.photo) $('#photo').hide();
+                if (res.data.employee.photo) $('#photo').show();
                 $('#id').text(res.data.employee.id);
                 $('#name').text(res.data.employee.name);
                 $('#position').text(res.data.employee.position);
                 $('#hiring_date').text(res.data.employee.hired_at);
                 $('#salary').text(res.data.employee.salary);
                 $('#boss_name').text(res.data.bossName);
-
+                console.log(res.data.photo);
+                $('#photo a').attr("href",res.data.employee.photo);
+                $('#photo a img').attr("src",res.data.employee.photo);
             });
         });
 

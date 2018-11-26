@@ -39,15 +39,18 @@
                 </form>
             </div>
         </div>
-        <p class="text-center"  v-if="totalRowsLocal > 1">{{ totalRowsLocal }} elements found</p>
-        <p class="text-center"  v-if="totalRowsLocal == 1">{{ totalRowsLocal }} element found</p>
+        <p class="text-center"  v-if="totalRowsLocal > 1">{{ totalRowsLocal }} elements found</p> <span v-if="isRefreshing" class="badge badge-primary mb-1">  Updating...</span>
+        <p class="text-center"  v-if="totalRowsLocal == 1">{{ totalRowsLocal }} element found</p> <span v-if="isRefreshing" class="badge badge-primary mb-1">  Updating...</span>
         <div class="row justify-content-center">
-            <span v-if="isRefreshing" class="badge badge-primary mb-1">Updating...</span>
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr style="background: rgba(97,156,33,0.57);">
                     <th @click="sortId++" class="sort-field" style="width:7%;">ID
                         <div :class="idClass" class="d-flex flex-column float-right">
+                        </div>
+                    </th>
+                    <th @click="" class="sort-field" style="width:10%;">Photo
+                        <div :class="photoClass" class="d-flex flex-column float-right">
                         </div>
                     </th>
                     <th @click="sortName++" class="sort-field" style="width:18%;">Name
@@ -58,7 +61,7 @@
                         <div :class="positionClass" class="d-flex flex-column float-right">
                         </div>
                     </th>
-                    <th @click="sortDate++" class="sort-field" style="width:20%;">Hiring Date
+                    <th @click="sortDate++" class="sort-field" style="width:10%;">Hiring Date
                         <div :class="dateClass" class="d-flex flex-column float-right">
                         </div>
                     </th>
@@ -75,6 +78,13 @@
                 <tbody>
                 <tr v-for="employee in employeesLocal">
                     <td>{{employee.id }}</td>
+                    <td>
+                        <div v-if="employee.photo" id="photo" class="img-thumbnail">
+                            <a v-bind:href="employee.photo">
+                                <img v-bind:src="employee.photo" alt="Photo" style="width:100%">
+                            </a>
+                        </div>
+                    </td>
                     <td class="sort-field" @click="employeeProfile(employee.id)">{{ employee.name }}</td>
                     <td>{{ employee.position }}</td>
                     <td>{{ employee.hired_at }}</td>

@@ -35,6 +35,15 @@
         {!! Form::text('boss_id',isset($employee->boss_id) ? $employee->boss_id : "",['class'=>'form-control','placeholder'=>'Boss id']) !!}
     </div>
 
+    <div class="form-group">
+        <label>Photo</label>
+        <br>
+        @if(!empty($employee->photo))
+            <img src="{{asset($employee->photo)}}" alt="Photo" width="200px">
+        @endif
+        {!! Form::file('photo',['class'=>'form-control']) !!}
+    </div>
+
     <button type="submit" class="btn btn-success text-uppercase"><i class="fa fa-save"></i> Update</button>
 
     {!! Form::close() !!}

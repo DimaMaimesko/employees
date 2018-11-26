@@ -47854,6 +47854,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['employees', 'pages', 'totalRows'],
@@ -48365,19 +48375,25 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
+    _vm.isRefreshing
+      ? _c("span", { staticClass: "badge badge-primary mb-1" }, [
+          _vm._v("  Updating...")
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _vm.totalRowsLocal == 1
       ? _c("p", { staticClass: "text-center" }, [
           _vm._v(_vm._s(_vm.totalRowsLocal) + " element found")
         ])
       : _vm._e(),
     _vm._v(" "),
+    _vm.isRefreshing
+      ? _c("span", { staticClass: "badge badge-primary mb-1" }, [
+          _vm._v("  Updating...")
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _c("div", { staticClass: "row justify-content-center" }, [
-      _vm.isRefreshing
-        ? _c("span", { staticClass: "badge badge-primary mb-1" }, [
-            _vm._v("Updating...")
-          ])
-        : _vm._e(),
-      _vm._v(" "),
       _c("table", { staticClass: "table table-bordered table-striped" }, [
         _c("thead", [
           _c("tr", { staticStyle: { background: "rgba(97,156,33,0.57)" } }, [
@@ -48397,6 +48413,22 @@ var render = function() {
                 _c("div", {
                   staticClass: "d-flex flex-column float-right",
                   class: _vm.idClass
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              {
+                staticClass: "sort-field",
+                staticStyle: { width: "10%" },
+                on: { click: function($event) {} }
+              },
+              [
+                _vm._v("Photo\n                    "),
+                _c("div", {
+                  staticClass: "d-flex flex-column float-right",
+                  class: _vm.photoClass
                 })
               ]
             ),
@@ -48445,7 +48477,7 @@ var render = function() {
               "th",
               {
                 staticClass: "sort-field",
-                staticStyle: { width: "20%" },
+                staticStyle: { width: "10%" },
                 on: {
                   click: function($event) {
                     _vm.sortDate++
@@ -48508,6 +48540,23 @@ var render = function() {
           _vm._l(_vm.employeesLocal, function(employee) {
             return _c("tr", [
               _c("td", [_vm._v(_vm._s(employee.id))]),
+              _vm._v(" "),
+              _c("td", [
+                employee.photo
+                  ? _c(
+                      "div",
+                      { staticClass: "img-thumbnail", attrs: { id: "photo" } },
+                      [
+                        _c("a", { attrs: { href: employee.photo } }, [
+                          _c("img", {
+                            staticStyle: { width: "100%" },
+                            attrs: { src: employee.photo, alt: "Photo" }
+                          })
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              ]),
               _vm._v(" "),
               _c(
                 "td",
