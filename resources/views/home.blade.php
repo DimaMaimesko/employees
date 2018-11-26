@@ -14,9 +14,13 @@
                         </div>
                     @endif
                     <div class="text-center">
-                    You are logged in!
+                        @if(Auth::check())You are logged in!
+                        @else
+                            <p class="alert-warning">You are not logged in!</p>
+                            <p class="alert-warning">Not all actions are allowed</p>
+                        @endif
                         <p>
-                            <a href="{{ route('list.index') }}" class="btn btn-success">
+                            <a href="{{ route('jstree.index') }}" class="btn btn-success">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                 EMPLOYEES
                             </a>

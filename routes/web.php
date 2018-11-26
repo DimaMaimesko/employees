@@ -1,14 +1,15 @@
 <?php
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('guest');
 
 Route::group([
+    'middleware' => 'auth',
     'prefix' => 'list',
     'as' => 'list.',
     ], function () {
@@ -26,6 +27,7 @@ Route::group([
     });
 
 Route::group([
+    'middleware' => 'auth',
     'prefix' => 'ajaxlist',
     'as' => 'ajaxlist.',
     ], function () {
@@ -58,7 +60,7 @@ Route::group([
     'as' => 'jstree.',
     ], function () {
         Route::get('/', 'JstreeController@index')->name('index');
-        Route::post('/', 'JstreeController@sort')->name('sort');
+        Route::post('/', 'JstreeController@sort')->name('sort')->middleware('auth');;
         Route::post('/show', 'JstreeController@show')->name('show');
         Route::post('/add-node', 'JstreeController@addNode')->name('add.node');
 
