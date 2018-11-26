@@ -13,3 +13,10 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
+mix.scripts([
+    'node_modules/jquery/dist/jquery.js',
+    'node_modules/jstree/dist/jstree.js',
+],  'public/js/jstree.js').version();
+mix.styles([
+    'node_modules/jstree/dist/themes/default/style.css',
+], 'public/css/jstree.css').version();
